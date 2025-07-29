@@ -128,7 +128,7 @@ function generate_node_option_value_object(object: object): string {
 
   return '{' + output.join(', ') + '}'
 }
-export function generate_node_schema(fields: NodeSchemaField[]): string | undefined {
+export function generate_node_schema(fields: NodeSchemaField[]): string {
   if (!fields?.length) return ''
 
   const fields_schema = generate_schema_from_fields(fields)
