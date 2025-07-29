@@ -1,0 +1,12 @@
+# Logs
+yarn-debug.log*
+yarn-error.log*
+
+node_modules
+dist
+.env
+
+# Editor directories and files
+.vscode
+.idea
+

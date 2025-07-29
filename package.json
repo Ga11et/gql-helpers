@@ -1,0 +1,22 @@
+{
+  "name": "gql-helpers",
+  "version": "1.0.0",
+  "repository": "git@github.com:Ga11et/gql-helpers.git",
+  "author": "fyodor <sivkovfa@srg-eco.ru>",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^30.0.5",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.8.3"
+  }
+}
