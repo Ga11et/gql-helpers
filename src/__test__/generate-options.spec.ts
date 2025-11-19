@@ -103,11 +103,12 @@ describe('Генерация graphql query options', () => {
       { field: 'meta', value: { pageSize: 16, page: 1 } },
       { field: 'name', value: { data: { hello: 'world' } } },
       { field: 'boolean', value: true },
+      { field: 'array', value: ['world', 'hello', { deep: 'world' }, { deep: { verydeep: 'world' } }] },
       { type: 'field', field: 'field', value: 'hello' }
     ]
     const output = generate_node_options(input)
     expect(output).toEqual(
-      '(filter: [["and",["=","name","fyodor"],[">=","age",18]],["or",["=","guid","fyodor"],["=","valid",false]]], sort: ["-caption","type","date","-title","name"], meta: {pageSize: 16, page: 1}, name: {data: {hello: "world"}}, boolean: true, field: "hello")'
+      '(filter: [["and",["=","name","fyodor"],[">=","age",18]],["or",["=","guid","fyodor"],["=","valid",false]]], sort: ["-caption","type","date","-title","name"], meta: {pageSize: 16, page: 1}, name: {data: {hello: "world"}}, boolean: true, array: ["world", "hello", {deep: "world"}, {deep: {verydeep: "world"}}], field: "hello")'
     )
   })
 })

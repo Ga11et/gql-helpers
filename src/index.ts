@@ -118,14 +118,19 @@ function generate_node_option_value(value: unknown): string {
 }
 function generate_node_option_value_object(object: object): string {
   const output = []
+  let isArray = false
 
   for (const [key, value] of Object.entries(object)) {
-    if (typeof value === 'string') output.push(`${key}: "${value}"`)
-    else if (typeof value === 'number') output.push(`${key}: ${value.toString()}`)
-    else if (typeof value === 'boolean') output.push(`${key}: ${value.toString()}`)
-    else output.push(`${key}: ${generate_node_option_value_object(value)}`)
+    const identifier = isNumeric(key) ? '' : `${key}: `
+    if (isNumeric(key)) isArray = true
+
+    if (typeof value === 'string') output.push(`${identifier}"${value}"`)
+    else if (typeof value === 'number') output.push(`${identifier}${value.toString()}`)
+    else if (typeof value === 'boolean') output.push(`${identifier}${value.toString()}`)
+    else output.push(`${identifier}${generate_node_option_value_object(value)}`)
   }
 
+  if (isArray) return '[' + output.join(', ') + ']'
   return '{' + output.join(', ') + '}'
 }
 export function generate_node_schema(fields: NodeSchemaField[]): string {
@@ -185,4 +190,8 @@ function generate_gql_string_from_schema(obj: RequestSource): string {
   }
 
   return parts.join(' ')
+}
+
+function isNumeric(str: string): boolean {
+  return str.trim() !== '' && !Number.isNaN(Number(str))
 }

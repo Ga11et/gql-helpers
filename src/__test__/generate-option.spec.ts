@@ -40,4 +40,22 @@ describe('Генерация graphql query option', () => {
     const output = generate_node_option(input)
     expect(output).toEqual('name: {data: {hello: "world"}}')
   })
+
+  it('генерация option типа ARRAY"', () => {
+    const input: FieldNodeOption = {
+      field: 'name',
+      value: { data: { hello: ['world', 'hello'] } }
+    }
+    const output = generate_node_option(input)
+    expect(output).toEqual('name: {data: {hello: ["world", "hello"]}}')
+  })
+
+  it('генерация option типа ARRAY OF OBJECT"', () => {
+    const input: FieldNodeOption = {
+      field: 'name',
+      value: { data: { hello: [{ text: 'world' }, { text: 'hello' }] } }
+    }
+    const output = generate_node_option(input)
+    expect(output).toEqual('name: {data: {hello: [{text: "world"}, {text: "hello"}]}}')
+  })
 })

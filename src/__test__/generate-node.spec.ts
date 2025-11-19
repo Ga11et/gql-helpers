@@ -89,6 +89,11 @@ describe('Генерация graphql query node', () => {
         type: 'field',
         field: 'deepobject',
         value: { data: { owner: { guid: '123' } } }
+      },
+      {
+        type: 'field',
+        field: 'deeparrayobject',
+        value: { data: { owner: [{ guid: '124' }, { guid: '125' }, { guid: '126' }, { guid: '127' }] } }
       }
     ]
     const fields: NodeSchemaField[] = [
@@ -177,7 +182,7 @@ describe('Генерация graphql query node', () => {
     ]
     const output = generate_node(title, options, fields)
     expect(output).toEqual(
-      'Title(id: \"1\", deepobject: {data: {owner: {guid: \"123\"}}}) { data { field1 field3 } field2 field4 Relation_1(filter: [[\"and\",[\"=\",\"name\",\"fyodor\"],[\">=\",\"age\",18]],[\"or\",[\"=\",\"guid\",\"fyodor\"],[\"=\",\"valid\",false]]], sort: [\"-caption\",\"type\",\"date\",\"-title\",\"name\"], meta: {pageSize: 16, page: 1}, name: {data: {hello: \"world\"}}, boolean: true, field: \"hello\") { field field2 field3 field4 } R2: Relation_2(filter: [[\"=\",\"name\",\"fyodor\"],[\">=\",\"age\",18]], sort: [\"caption\"]) { field field2 Second_Relation(hello: \"world\") { data { field } } field4 } }'
+      'Title(id: "1", deepobject: {data: {owner: {guid: "123"}}}, deeparrayobject: {data: {owner: [{guid: "124"}, {guid: "125"}, {guid: "126"}, {guid: "127"}]}}) { data { field1 field3 } field2 field4 Relation_1(filter: [["and",["=","name","fyodor"],[">=","age",18]],["or",["=","guid","fyodor"],["=","valid",false]]], sort: ["-caption","type","date","-title","name"], meta: {pageSize: 16, page: 1}, name: {data: {hello: "world"}}, boolean: true, field: "hello") { field field2 field3 field4 } R2: Relation_2(filter: [["=","name","fyodor"],[">=","age",18]], sort: ["caption"]) { field field2 Second_Relation(hello: "world") { data { field } } field4 } }'
     )
   })
 })
